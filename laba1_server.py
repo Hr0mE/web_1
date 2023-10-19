@@ -4,8 +4,9 @@ import socket
 import tkinter as tk
 
 def start_server():
-    global lbl
-    HOST = ('10.193.141.117', 2000)
+    global lbl, ip, PORT
+    port = 2000
+    HOST = (ip, port)
     server = socket.create_server(HOST)
     server.listen(1)
     print('Start listening')
@@ -24,7 +25,11 @@ def start_server():
 
 window = tk.Tk()
 COUNTER = str(0)
+PORT = 2000
+ip = socket.gethostbyname(socket.gethostname())
 
+ip_lbl = tk.Label(window, text = f'Ваш сокет:\n{ip}:{PORT}', font=("Helvetica", "12"))
+ip_lbl.pack()
 lbl = tk.Label(window, text = COUNTER, font=("Helvetica", "16"))
 lbl.pack()
 button = tk.Button(window, text="Start Server", font=("Helvetica", "12"), command=start_server)
